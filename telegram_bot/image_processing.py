@@ -1,9 +1,10 @@
+import logging
+from typing import Optional
 import torch
 from torchvision import transforms
 from PIL import Image
-import logging
-from typing import Optional
-from model import UNetGenerator
+
+from model import UNetGenerator, UNetSkipConnectionLayer
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -18,13 +19,15 @@ MODEL_FILES = {
     "blur": "GAN_FD_to_QD/GAN.pt"
 }
 
+
 logger = logging.getLogger(__name__)
 
-MODEL_PATH = "/app/models/unet_model.pt"
+MODEL_PATH = "/app/GAN.pt"
 
 
 def load_model(model_type: str, task: Optional[str] = 'enhancement') -> torch.nn.Module:
-    model = torch.load(MODEL_PATH, map_location=DEVICE)
+    torch.serialization.add_safe_globals({"UNetGenerator": UNetGenerator})
+    model = torch.load(MODEL_PATH, map_location=DEVICE, weights_only=False)
     model.eval()
     logger.debug(f"Uploaded model from {MODEL_PATH}")
     return model.to(DEVICE)

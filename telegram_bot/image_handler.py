@@ -6,7 +6,7 @@ from image_processing import process_image
 
 logger = logging.getLogger(__name__)
 
-async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.user_data.get("waiting_for_image"):
         await update.message.reply_text("Сначала выберите режим через /start.")
         return

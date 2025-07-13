@@ -1,9 +1,12 @@
 import logging
 import os
+import torch
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, filters, MessageHandler
+
 from config import BOT_TOKEN
 from action_handler import button_handler, start
 from image_handler import handle_image
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, filters, MessageHandler
+from model import UNetGenerator, UNetSkipConnectionLayer
 
 
 os.makedirs("user_images", exist_ok=True)
@@ -12,6 +15,11 @@ logging.basicConfig(
     level=logging.DEBUG
 )
 logger = logging.getLogger(__name__)
+
+torch.serialization.add_safe_globals({
+    'UNetGenerator': UNetGenerator,
+    'UNetSkipConnectionLayer': UNetSkipConnectionLayer
+})
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(BOT_TOKEN).build()

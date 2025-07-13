@@ -26,7 +26,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if query.data == 'mode1':
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await query.message.reply_text("Выбран режим 1: обработка КТ. Обработка займет приблизительно N секунд",
+        await query.message.reply_text("Выбран режим 1: обработка КТ. Загрузите изображение." \
+        "Обработка займет приблизительно N секунд",
                                        reply_markup=reply_markup)
         context.user_data['mode'] = 'mode1'
         context.user_data["waiting_for_image"] = True

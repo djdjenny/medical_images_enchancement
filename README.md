@@ -42,3 +42,7 @@ or use docker
 ```bash
 pip install -r requirements.txt
 ```
+
+Due to the big model size, it should be downloaded from google drive and manually replaced to telegram-bot folder.
+
+Bot is hosted on Hetzner VPS, HTTP endpoint obtained by ngrok.
