@@ -31,7 +31,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['mode'] = 'mode1'
 
     elif query.data == 'mode2':
-        await query.message.reply_text("Выбран режим 2: обработка УЗИ. Обработка займет приблизительно N секунд.")
+        await query.message.reply_text("Выбран режим 2: обработка УЗИ. Режим в разработке.", reply_markup=reply_markup)
         context.user_data['mode'] = 'mode2'
 
     elif query.data == 'back':
