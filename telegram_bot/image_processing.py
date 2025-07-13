@@ -38,7 +38,7 @@ def process_image(input_path: str, model_type: Optional[str] = 'ct', task: Optio
     image = Image.open(input_path).convert("L")
     logger.debug(f"Image was loaded from {input_path}")
     transform = transforms.Compose([
-        transforms.Resize((512, 512)), 
+        transforms.Resize((512, 512)),
         transforms.ToTensor(),
     ])
     input_tensor = transform(image).unsqueeze(0).to(DEVICE)
