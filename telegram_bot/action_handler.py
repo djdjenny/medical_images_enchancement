@@ -27,7 +27,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == 'mode1':
         reply_markup = InlineKeyboardMarkup(keyboard)
         await query.message.reply_text("Выбран режим 1: обработка КТ. Загрузите изображение." \
-        "Обработка займет приблизительно N секунд",
+        "Обработка займет приблизительно 5-10 секунд. " \
+        "При загрузке нескольких изображений будет обработано самое большое",
                                        reply_markup=reply_markup)
         context.user_data['mode'] = 'mode1'
         context.user_data["waiting_for_image"] = True
@@ -41,3 +42,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == 'back':
         await start(update, context)
         context.user_data['mode'] = None
+
+
+async def go_back_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.callback_query.answer()
+    await start(update, context)

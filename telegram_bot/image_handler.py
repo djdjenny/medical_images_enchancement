@@ -1,6 +1,6 @@
 import logging
 import time
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 from image_processing import process_image
 
@@ -12,10 +12,6 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     photo = update.message.photo[-1]
-
-    if len(update.message.photo) > 1:
-        await update.message.reply_text("Вы отправили несколько изображений. " \
-        "Самое большое из них будет обработано")
 
     file = await context.bot.get_file(photo.file_id)
 
@@ -30,9 +26,17 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
         result_path = process_image(input_path)
         with open(result_path, 'rb') as result_image:
             await update.message.reply_photo(result_image, caption="Вот улучшенное изображение!")
+        keyboard = [
+            [InlineKeyboardButton("Выбор режима", callback_data="go_back_to_start")]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        await update.message.reply_text(
+            "Сгенерировать другое изображение",
+            reply_markup=reply_markup
+        )
 
     except Exception as e:
         await update.message.reply_text(f"Ошибка при обработке: {e}")
 
-    await update.message.reply_text("Изображение получено! Идёт обработка...")
     context.user_data["waiting_for_image"] = False
