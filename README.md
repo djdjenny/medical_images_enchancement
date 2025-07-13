@@ -5,6 +5,7 @@ This is the capstone project on DLS course part 1 (2025). The main idea of the p
 
 ## Project structure
 
+```
 telegram_bot/
 ├── bot.py
 ├── image_processing.py
@@ -21,6 +22,7 @@ learning_notebooks/
 ├── model_training.ipynb
 ├── model_inference.ipynb
 └── README.md
+```
 
 ## How to install
 
@@ -46,3 +48,6 @@ pip install -r requirements.txt
 Due to the big model size, it should be downloaded from google drive and manually replaced to telegram-bot folder.
 
 Bot is hosted on Hetzner VPS, HTTP endpoint obtained by ngrok.
+
+
+# Model architecture and training

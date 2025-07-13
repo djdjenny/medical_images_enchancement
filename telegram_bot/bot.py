@@ -3,7 +3,7 @@ import os
 import torch
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, filters, MessageHandler
 
-from action_handler import button_handler, go_back_handler, start
+from action_handler import button_handler, start
 from config import BOT_TOKEN
 from image_handler import handle_image
 from model import UNetGenerator, UNetSkipConnectionLayer
@@ -30,7 +30,6 @@ def main() -> None:
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
     app.add_handler(MessageHandler(filters.PHOTO, handle_image))
-    app.add_handler(CallbackQueryHandler(go_back_handler, pattern="^go_back_to_start$"))
     app.run_webhook(
         listen="0.0.0.0",
         port=8443,

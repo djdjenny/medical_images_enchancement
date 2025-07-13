@@ -27,7 +27,7 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
         with open(result_path, 'rb') as result_image:
             await update.message.reply_photo(result_image, caption="Вот улучшенное изображение!")
         keyboard = [
-            [InlineKeyboardButton("Выбор режима", callback_data="go_back_to_start")]
+            [InlineKeyboardButton("Выбор режима", callback_data="back")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
