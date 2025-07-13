@@ -51,5 +51,8 @@ Bot is hosted on Hetzner VPS, HTTP endpoint obtained by ngrok.
 
 
 # Model architecture and training
-[AAPM challenge](https://www.aapm.org/)
-[Ultrasound image enhancement challenge](https://ultrasoundenhance2023.grand-challenge.org/)
+
+Main inspiration for this project was [CT denoising CycleGAN](https://github.com/taehoon-yoon/CT-denoising-using-CycleGAN/tree/master) model built for [AAPM challenge](https://www.aapm.org/).
+
+I tried to recreate it with minor refactoring and apply the model to another dataset from 
+[Ultrasound image enhancement challenge](https://ultrasoundenhance2023.grand-challenge.org/).
