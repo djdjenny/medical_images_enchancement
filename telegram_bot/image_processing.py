@@ -2,8 +2,8 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import logging
-import os
 from typing import Optional
+from model import UNetGenerator
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
