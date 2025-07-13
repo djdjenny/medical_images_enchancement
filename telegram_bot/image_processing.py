@@ -20,13 +20,13 @@ MODEL_FILES = {
 
 logger = logging.getLogger(__name__)
 
+MODEL_PATH = "/app/models/unet_model.pt"
+
 
 def load_model(model_type: str, task: Optional[str] = 'enhancement') -> torch.nn.Module:
-    logger.info(f"Model upload from {model_path}")
-    model_path = os.path.join(MODEL_DIRS[model_type], MODEL_FILES[task])
-    model = torch.load(model_path, map_location=DEVICE)
+    model = torch.load(MODEL_PATH, map_location=DEVICE)
     model.eval()
-    logger.debug(f"Uploaded model from {model_path}")
+    logger.debug(f"Uploaded model from {MODEL_PATH}")
     return model.to(DEVICE)
 
 
