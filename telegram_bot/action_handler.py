@@ -28,7 +28,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup = InlineKeyboardMarkup(keyboard)
         await query.message.reply_text("Выбран режим 1: обработка КТ. Загрузите изображение. " \
         "Обработка займет приблизительно 5-10 секунд. " \
-        "При загрузке нескольких изображений будет обработано самое большое",
+        "При загрузке нескольких изображений будет обработано самое большое. " \
+        "Бот работает только с небольшими черно-белыми изображениями, " \
+        "но при необходимости приводит картинки к нужному формату.",
                                        reply_markup=reply_markup)
         context.user_data['mode'] = 'mode1'
         context.user_data["waiting_for_image"] = True
