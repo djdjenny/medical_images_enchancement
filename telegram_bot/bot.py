@@ -4,6 +4,7 @@ from action_handler import button_handler, start
 from image_handler import handle_image
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler
 
+print(BOT_TOKEN)
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(BOT_TOKEN).build()
