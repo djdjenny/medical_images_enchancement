@@ -1,5 +1,5 @@
 torch
 torchvision
 pillow
-python-telegram-bot
+python-telegram-bot==20.3
 dotenv
