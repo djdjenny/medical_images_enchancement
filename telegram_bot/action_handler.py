@@ -29,9 +29,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text("Выбран режим 1: обработка КТ. Обработка займет приблизительно N секунд",
                                        reply_markup=reply_markup)
         context.user_data['mode'] = 'mode1'
+        context.user_data["waiting_for_image"] = True
 
     elif query.data == 'mode2':
-        await query.message.reply_text("Выбран режим 2: обработка УЗИ. Режим в разработке.", reply_markup=reply_markup)
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        await query.message.reply_text("Выбран режим 2: обработка УЗИ. Режим в разработке.", 
+                                       reply_markup=reply_markup)
         context.user_data['mode'] = 'mode2'
 
     elif query.data == 'back':

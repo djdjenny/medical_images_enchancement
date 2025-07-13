@@ -1,20 +1,38 @@
-from image_processing import load_model, process_image
-from PIL import Image
+import logging
+import time
 from telegram import Update
 from telegram.ext import ContextTypes
+from image_processing import process_image
 
+logger = logging.getLogger(__name__)
 
-async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Изображение получено. Обработка пока недоступна.")
+async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.user_data.get("waiting_for_image"):
+        await update.message.reply_text("Сначала выберите режим через /start.")
+        return
 
+    photo = update.message.photo[-1]
 
-if __name__ == '__main__':
-    MODEL_PATH = 'C:\Studying\DLS\GAN.pt'
-    TEST_IMAGE = 'C:\Studying\DLS\1213.png'
+    if len(update.message.photo) > 1:
+        await update.message.reply_text("Вы отправили несколько изображений. " \
+        "Самое большое из них будет обработано")
 
-    model = load_model(MODEL_PATH)
-    input_img = Image.open("input.jpg")
-    output_img, elapsed = process_image(model, input_img)
+    file = await context.bot.get_file(photo.file_id)
 
-    output_img.save("output.jpg")
-    print(f"Время обработки: {elapsed:.3f} сек")
+    user_id = update.message.from_user.id
+    timestamp = int(time.time())
+    input_path = f"user_images/{user_id}_{timestamp}.jpg"
+    await file.download_to_drive(input_path)
+    logger.debug(f"file was downloaded to {input_path}")
+    await update.message.reply_text("Изображение получено! Идёт обработка...")
+
+    try:
+        result_path = process_image(input_path)
+        with open(result_path, 'rb') as result_image:
+            await update.message.reply_photo(result_image, caption="Вот улучшенное изображение!")
+
+    except Exception as e:
+        await update.message.reply_text(f"Ошибка при обработке: {e}")
+
+    await update.message.reply_text("Изображение получено! Идёт обработка...")
+    context.user_data["waiting_for_image"] = False
