@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY ../GAN.pt /app/models/gan_model.pt
+COPY GAN.pt /app/models/gan_model.pt
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
