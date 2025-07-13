@@ -2,10 +2,11 @@
 
 This is the capstone project on DLS course part 1 (2025). The main idea of the project is to make a Telegram bot, which enhance medical images (CT or US images in particulary) quality via CycleGAN architecture.
 
+bot link: https://t.me/medical_images_enhancement_bot
+
 ## Project motivation: 
 
 Improving medical image quality is very important when using low-dose CT scans or old imaging devices. Poor-quality images can lead to noise and artifacts, making diagnosis more difficult. High-quality images help clinicians detect subtle abnormalities and reduce the risk of misdiagnosis, especially in early stages of disease.
-
 
 
 ## Project structure
