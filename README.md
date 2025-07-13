@@ -51,3 +51,5 @@ Bot is hosted on Hetzner VPS, HTTP endpoint obtained by ngrok.
 
 
 # Model architecture and training
+[AAPM challenge](https://www.aapm.org/)
+[Ultrasound image enhancement challenge](https://ultrasoundenhance2023.grand-challenge.org/)
